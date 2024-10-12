@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'datos.dart';
 
 void main() {
   runApp(MyApp());
 }
+
+const Color banorteRed = Color.fromARGB(255, 236, 0, 41);
 
 class MyApp extends StatelessWidget {
   @override
@@ -17,90 +21,135 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool _obscureText = true; // Estado para ocultar/mostrar la contraseña
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText; // Alternar la visibilidad
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    const Color myColor = Color.fromARGB(255, 236, 0, 41);
     return Scaffold(
-      body: Column(
-        children: [
-          // Parte superior con el logo
-          Container(
-            width: double.infinity,
-            height: 250,
-            decoration: BoxDecoration(
-              color: myColor,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(100),
-                bottomRight: Radius.circular(100),
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView( // Envuelve el Column en un SingleChildScrollView
+        child: Column(
+          children: [
+            // Parte superior con el logo
+            Container(
+              width: double.infinity,
+              height: 250,
+              decoration: BoxDecoration(
+                color: banorteRed,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(245),
+                  bottomRight: Radius.circular(245),
+                ),
+              ),
+              child: Center(
+                child: Image.asset("assets/images/logo.png"),
               ),
             ),
-            child: Center(
-              child: Image.asset("assets/images/BackgroundRed.png"),
-            ),
-          ),
-          SizedBox(height: 40),
-          // Título
-          Text(
-            'Inicia tu educación financiera',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 20),
-          // Campo de texto para email
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextField(
-              decoration: InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
+            SizedBox(height: 50),
+            // Título
+            Text(
+              'Inicia tu educación financiera',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ),
-          SizedBox(height: 20),
-          // Campo de texto para contraseña
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Contraseña',
-                border: OutlineInputBorder(),
+            SizedBox(height: 20),
+            // Campo de texto para email
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: CupertinoTextField(
+                placeholder: "Email",
               ),
             ),
-          ),
-          SizedBox(height: 20),
-          // Botón de iniciar sesión
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Lógica para iniciar sesión
-              },
-              child: Text('Iniciar Sesión'),
-              style: ElevatedButton.styleFrom(
-                shadowColor: Colors.red,
-                minimumSize: Size(double.infinity, 50),
+            SizedBox(height: 20),
+            // Campo de texto para contraseña
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Stack(
+                alignment: Alignment.centerRight,
+                children: [
+                  CupertinoTextField(
+                    obscureText: _obscureText,
+                    placeholder: "Contraseña",
+                  ),
+                  // Botón para mostrar/ocultar contraseña
+                  IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.grey,
+                    ),
+                    onPressed: _togglePasswordVisibility,
+                  ),
+                ],
               ),
             ),
-          ),
-          SizedBox(height: 20),
-          // Texto de registro
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('¿No tienes cuenta?'),
-              TextButton(
+            SizedBox(height: 20),
+            // Botón de iniciar sesión
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ElevatedButton(
                 onPressed: () {
-                  // Lógica para registrarse
+                  // Lógica para iniciar sesión
                 },
-                child: Text('Regístrate'),
+                child: Text('Iniciar Sesión'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: banorteRed,
+                  foregroundColor: Colors.white,
+                  shadowColor: banorteRed,
+                  minimumSize: Size(double.infinity, 50),
+                ),
               ),
-            ],
-          ),
-        ],
+            ),
+            SizedBox(height: 20),
+            // Texto de registro
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('¿No tienes cuenta?'),
+                TextButton(
+                  onPressed: () {
+                    // Lógica para registrarse
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RegisterPage()),
+                    );
+                  },
+                  child: Text('Regístrate'),
+                  style: TextButton.styleFrom(
+                    foregroundColor: banorteRed,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    // Lógica para recuperar contraseña
+                  },
+                  child: Text("Olvidé mi contraseña"),
+                  style: TextButton.styleFrom(
+                    foregroundColor: banorteRed,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

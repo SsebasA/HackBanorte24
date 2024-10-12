@@ -28,4 +28,5 @@ flutter:
   assets:
     - assets/images/BackgroundRed.png
     - assets/images/BackgroundRed.svg
+    - assets/images/logo.png
   
