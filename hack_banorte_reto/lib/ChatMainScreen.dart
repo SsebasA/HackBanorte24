@@ -4,6 +4,8 @@ void main() {
   runApp(MyApp());
 }
 
+const Color banorteGreyBackground = Color.fromARGB(255, 106, 104, 103);
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -75,20 +77,17 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: banorteGreyBackground,
       body: Column(
         children: <Widget>[
           // Botón superior
+          SizedBox(height: 300),
           GestureDetector(
             onTap: _openMenu,
             child: Container(
               padding: EdgeInsets.all(20.0),
               alignment: Alignment.topCenter,
-              child: Icon(
-                Icons.menu, // Aquí puedes cambiar el icono por tu imagen o logo
-                color: Colors.white,
-                size: 80.0,
-              ),
+              child: Image.asset("assets/images/logo.png"),
             ),
           ),
           Expanded(

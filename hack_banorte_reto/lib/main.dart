@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hack_banorte_reto/chat.dart';
+import 'package:hack_banorte_reto/ChatMainScreen.dart';
 import 'package:hack_banorte_reto/login.dart';
 
 void main() {

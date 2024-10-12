@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hack_banorte_reto/ChatMainScreen.dart';
+import 'package:hack_banorte_reto/login.dart';
 
 
 void main() {
@@ -119,9 +121,28 @@ class _RegisterPageState extends State<RegisterPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _buildActionButton('Atrás', banorteRed, Colors.white, false),
-                    _buildActionButton('Continuar', banorteRed, Colors.white, _termsAccepted),
-                  ],
+                    ElevatedButton(onPressed: () {
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        );
+                    },
+                    child: Text('Volver'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: banorteRed,
+                      foregroundColor: Colors.white
+                    )),
+                    ElevatedButton(onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChatScreen()),
+                      );
+                    }, 
+                    child: Text('Registrar'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: banorteRed,
+                      foregroundColor: Colors.white
+                    )),]
                 ),
               ],
             ),
@@ -148,23 +169,5 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   // Función para construir botones
-  Widget _buildActionButton(String text, Color backgroundColor, Color textColor, bool isEnabled) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isEnabled ? backgroundColor : Colors.grey, // Deshabilita el botón si no está habilitado
-        padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 15.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-      onPressed: isEnabled ? () {
-        // Acción del botón
-        print('$text presionado');
-      } : null, // Si no está habilitado, el botón no se puede presionar
-      child: Text(
-        text,
-        style: TextStyle(color: textColor),
-      ),
-    );
-  }
+  
 }
