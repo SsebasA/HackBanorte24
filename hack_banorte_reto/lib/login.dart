@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    const Color myColor = Color.fromARGB(255, 236, 0, 41);
     return Scaffold(
       body: Column(
         children: [
@@ -28,18 +29,14 @@ class LoginPage extends StatelessWidget {
             width: double.infinity,
             height: 250,
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: myColor,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(100),
                 bottomRight: Radius.circular(100),
               ),
             ),
             child: Center(
-              child: Icon(
-                Icons.assessment, // Cambia este icono por el que desees
-                size: 80,
-                color: Colors.white,
-              ),
+              child: Image.asset("assets/images/BackgroundRed.png"),
             ),
           ),
           SizedBox(height: 40),

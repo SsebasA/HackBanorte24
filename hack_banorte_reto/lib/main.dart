@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(), // Cambia FirstScreen por LoginScreen
+      home: LoginPage(), // Cambia FirstScreen por LoginScreen
     );
   }
 }
