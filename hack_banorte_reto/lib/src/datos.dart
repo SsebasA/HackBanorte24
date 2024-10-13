@@ -2,8 +2,7 @@ import 'package:com.banorteEduApp.app/src/Services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:com.banorteEduApp.app/src/login.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
+
 
 class MyApp extends StatelessWidget {
   @override
