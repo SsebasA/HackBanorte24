@@ -39,25 +39,35 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _obscureText = true;
   final AuthService _authService = AuthService();
-  final TextEditingController  _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String? _emailError; // Variable para almacenar el mensaje de error
 
- Future<void> _login() async {
-  try {
-    final user = await _authService.loginUser(
-      _emailController.text.trim(),
-      _passwordController.text.trim(),
-    );
-    
-  } catch(e) {
-    print("Error al iniciar sesión $e");
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Error al iniciar sesión"))
-    );
-
+  Future<void> _login() async {
+    if (_validateEmail(_emailController.text.trim())) {
+      try {
+        final user = await _authService.loginUser(
+          _emailController.text.trim(),
+          _passwordController.text.trim(),
+        );
+      } catch (e) {
+        print("Error al iniciar sesión $e");
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Error al iniciar sesión")));
+      }
+    } else {
+      setState(() {
+        _emailError = "Por favor, ingresa un email válido.";
+      });
+    }
   }
- }
 
+  bool _validateEmail(String email) {
+    // Expresión regular para validar el formato del correo electrónico
+    final emailRegex =
+        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+    return RegExp(emailRegex).hasMatch(email);
+  }
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -101,38 +111,46 @@ class _LoginPageState extends State<LoginPage> {
             // Campo de texto para email
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: 
-              TextField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  hintText: "Email",
-                  hintStyle: TextStyle(
-                    fontFamily: 'Gotham', // Asegúrate de agregar la fuente en tu proyecto
-                    fontSize: 12,
-                    color: Color(0xFF5B6670),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      hintText: "Email",
+                      hintStyle: TextStyle(
+                        fontFamily: 'Gotham',
+                        fontSize: 12,
+                        color: Color(0xFF5B6670),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        borderSide: BorderSide(color: Color(0xFF5B6670)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          _emailController.clear(); // Limpiar el campo
+                        },
+                      ),
+                    ),
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                    borderSide: BorderSide(color: Color(0xFF5B6670)),
-                    
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black
-                    )
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () {
-                      // Acción para limpiar el campo
-                    },
-                  ),
-                ),
-      ),
-              
+                  if (_emailError != null) // Mostrar error si existe
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        _emailError!,
+                        style: TextStyle(color: Colors.red, fontSize: 12),
+                      ),
+                    ),
+                ],
+              ),
             ),
             SizedBox(height: 20),
             // Campo de texto para contraseña
@@ -146,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       hintText: "Contraseña",
                       hintStyle: TextStyle(
-                        fontFamily: 'Gotham', // Asegúrate de agregar la fuente en tu proyecto
+                        fontFamily: 'Gotham',
                         fontSize: 12,
                         color: Color(0xFF5B6670),
                       ),
@@ -155,19 +173,16 @@ class _LoginPageState extends State<LoginPage> {
                         borderSide: BorderSide(color: Color(0xFF5B6670)),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black
-                        )
+                        borderSide: BorderSide(color: Colors.black),
                       ),
                       filled: true,
                       fillColor: Colors.white,
-                      contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
-                      
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
                     ),
                     obscureText: _obscureText,
                     keyboardType: TextInputType.text,
                   ),
-                 
                   // Botón para mostrar/ocultar contraseña
                   IconButton(
                     icon: Icon(

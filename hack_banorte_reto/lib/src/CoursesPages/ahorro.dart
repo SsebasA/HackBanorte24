@@ -1,3 +1,4 @@
+import 'package:com.banorteEduApp.app/src/login.dart';
 import 'package:flutter/material.dart';
 
 class SavingsAndInvestmentScreen extends StatelessWidget {
@@ -13,12 +14,12 @@ class SavingsAndInvestmentScreen extends StatelessWidget {
             children: [
               Text(
                 "¿Qué son el Ahorro y la Inversión?",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: banorteRed),
               ),
               SizedBox(height: 10),
               Row(
                 children: [
-                  Icon(Icons.savings, color: Colors.blue),
+                  Icon(Icons.savings, color: banorteRed),
                   SizedBox(width: 10),
                   Expanded(
                     child: Text(
@@ -54,7 +55,7 @@ class SavingsAndInvestmentScreen extends StatelessWidget {
               SizedBox(height: 20),
               Text(
                 "¿Cómo empezar a ahorrar e invertir?",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.orange),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: banorteGreen),
               ),
               SizedBox(height: 10),
               Text(

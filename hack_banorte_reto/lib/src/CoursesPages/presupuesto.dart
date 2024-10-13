@@ -1,3 +1,4 @@
+import 'package:com.banorteEduApp.app/src/login.dart';
 import 'package:flutter/material.dart';
 
 class PersonalBudgetScreen extends StatelessWidget {
@@ -13,12 +14,12 @@ class PersonalBudgetScreen extends StatelessWidget {
             children: [
               Text(
                 "¿Qué es un Presupuesto Personal?",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: banorteRed),
               ),
               SizedBox(height: 10),
               Row(
                 children: [
-                  Icon(Icons.account_balance, color: Colors.blue),
+                  Icon(Icons.account_balance, color: banorteRed),
                   SizedBox(width: 10),
                   Expanded(
                     child: Text(
@@ -32,7 +33,7 @@ class PersonalBudgetScreen extends StatelessWidget {
               SizedBox(height: 20),
               Text(
                 "¿Por qué es importante?",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: banorteGreen),
               ),
               SizedBox(height: 10),
               _buildInfoCard(
@@ -54,7 +55,7 @@ class PersonalBudgetScreen extends StatelessWidget {
               SizedBox(height: 20),
               Text(
                 "¿Cómo hacer un presupuesto personal?",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.orange),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: banorteGreen),
               ),
               SizedBox(height: 10),
               Text(
@@ -79,7 +80,7 @@ class PersonalBudgetScreen extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Row(
           children: [
-            Icon(Icons.check_circle, color: Colors.green),
+            Icon(Icons.check_circle, color: banorteGreen),
             SizedBox(width: 10),
             Expanded(
               child: Column(

@@ -1,3 +1,4 @@
+import 'package:com.banorteEduApp.app/src/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -104,7 +105,7 @@ class CoursePage extends StatelessWidget {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Colors.blueAccent,
+            color: banorteRed,
           ),
         ),
         SizedBox(height: 10),
@@ -123,7 +124,7 @@ class CoursePage extends StatelessWidget {
       style: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
-        color: Colors.blue,
+        color: banorteRed,
       ),
     );
   }
@@ -140,7 +141,7 @@ class CoursePage extends StatelessWidget {
         ),
         SizedBox(height: 10),
         ListTile(
-          leading: Icon(Icons.file_present, color: Colors.blueAccent),
+          leading: Icon(Icons.file_present, color: banorteRed),
           title: Text('Guía completa de educación financiera (PDF)'),
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -149,7 +150,7 @@ class CoursePage extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(Icons.video_library, color: Colors.blueAccent),
+          leading: Icon(Icons.video_library, color: banorteRed),
           title: Text('Video: Cómo hacer un presupuesto eficaz'),
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(
