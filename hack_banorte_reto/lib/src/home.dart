@@ -1,5 +1,6 @@
 import 'package:com.banorteEduApp.app/src/ChatMainScreen.dart';
 import 'package:com.banorteEduApp.app/src/chat.dart';
+import 'package:com.banorteEduApp.app/src/course_home.dart';
 import 'package:com.banorteEduApp.app/src/courses.dart';
 import 'package:com.banorteEduApp.app/src/login.dart';
 import 'package:com.banorteEduApp.app/src/profile.dart';
@@ -35,33 +36,64 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     ChatScreen(),
-    CoursesPage(),
+    RoadmapScreen(),
     Profile(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTabTapped,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
+      body: _currentIndex == -1 // -1 indica que estamos en la pantalla de login
+          ? LoginScreen()
+          : _pages[_currentIndex],
+      bottomNavigationBar: _currentIndex == -1 // No mostrar el navbar en la pantalla de login
+          ? null
+          : BottomNavigationBar(
+              currentIndex: _currentIndex,
+              onTap: _onTabTapped,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Inicio',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.book),
+                  label: 'Cursos',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Perfil',
+                ),
+              ],
+              selectedItemColor: Colors.red, // Color rojo para el ícono seleccionado
+              unselectedItemColor: Colors.grey, // Color gris para los íconos no seleccionados
+            ),
+    );
+  }
+}
+
+class LoginScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Iniciar Sesión',
+            style: TextStyle(fontSize: 24),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Cursos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            },
+            child: Text('Entrar'),
           ),
         ],
-        selectedItemColor: banorteRed, // Color rojo para el ícono seleccionado
-        unselectedItemColor: banorteGrey, // Color gris para los íconos no seleccionados
       ),
     );
   }
