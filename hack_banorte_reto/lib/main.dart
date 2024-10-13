@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(), // Cambia FirstScreen por LoginScreen
+      home: CourseListScreen(), // Cambia FirstScreen por LoginScreen
     );
   }
 }
