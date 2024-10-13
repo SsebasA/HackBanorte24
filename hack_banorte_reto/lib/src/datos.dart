@@ -1,11 +1,9 @@
+import 'package:com.banorteEduApp.app/src/Services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:com.banorteEduApp.app/src/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-
-
-const Color banorteRed = Color.fromARGB(255, 236, 0, 41);
 
 class MyApp extends StatelessWidget {
   @override
@@ -31,8 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _passwordVisible = false;
   bool _confirmPasswordVisible = false;
   bool _termsAccepted = false;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final DatabaseReference _dbRef = FirebaseDatabase.instance.ref().child('users');
+  final AuthService _authService = AuthService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
@@ -40,26 +37,29 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _secondNameController = TextEditingController();
 
   Future<void> registerUser() async {
-    try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword
-      (email: _emailController.text.trim(), 
-      password: _passwordController.text.trim(),
+    if (_passwordController.text != _confirmPasswordController.text){
+      return;
+    }
+
+    if(!_termsAccepted){
+      return;
+    }
+
+    final user = await _authService.registerUser(
+      email: _emailController.text.trim(), 
+      password: _passwordController.text.trim(), 
+      firstName: _firstNameController.text.trim(), 
+      secondName: _secondNameController.text.trim(),
       );
 
-      //Guardar la información en la db
-      User? user = userCredential.user;
-      if (user != null) {
-        _dbRef.child('users').child(user.uid).set({
-          'email': user.email,
-          'first_name': _firstNameController.text.trim(),
-          'second_name': _secondNameController.text.trim(),
-          'created_at': DateTime.now().toIso8601String(),
-          'password': _passwordController.text.trim(),
-        });
+      if (user != null){
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder:  (context) => LoginPage())
+        );
+      } else {
+        print("El registro fallo");
       }
-    } on FirebaseAuthException catch(e) {
-      print('Error: ${e.message}');
-    }
   }
 
 

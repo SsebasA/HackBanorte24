@@ -1,3 +1,4 @@
+import 'package:com.banorteEduApp.app/src/CoursesPages/introduccion_financiera.dart';
 import 'package:com.banorteEduApp.app/src/course_home.dart';
 import 'package:com.banorteEduApp.app/src/login.dart';
 import 'package:flutter/material.dart';

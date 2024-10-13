@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     ChatScreen(),
-    RoadmapScreen(),
+    CourseListScreen(),
     Profile(),
   ];
 

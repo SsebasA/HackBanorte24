@@ -1,4 +1,5 @@
 import 'package:com.banorteEduApp.app/src/ChatMainScreen.dart';
+import 'package:com.banorteEduApp.app/src/Services/auth.dart';
 import 'package:com.banorteEduApp.app/src/home.dart';
 import 'package:com.banorteEduApp.app/src/reestablecer_password.dart';
 import 'package:flutter/material.dart';
@@ -37,20 +38,31 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _obscureText = true;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final AuthService _authService = AuthService();
   final TextEditingController  _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _login() async {
-    try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: _emailController.text, 
-        password: _passwordController.text);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ChatScreen()));
-    } catch (e) {
-      print("Error al iniciar sesión $e");
+ Future<void> _login() async {
+  try {
+    final user = await _authService.loginUser(
+      _emailController.text.trim(),
+      _passwordController.text.trim(),
+    );
+    if(user != null){
+      Navigator.pushReplacement(
+        context, 
+        MaterialPageRoute(builder: (context) => ChatScreen()),
+        );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al inicar sesión')),
+      );
     }
+  } catch(e) {
+    print("Error al iniciar sesión $e");
+
   }
+ }
 
 
   void _togglePasswordVisibility() {
@@ -97,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: 
               TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   hintText: "Email",
                   hintStyle: TextStyle(
@@ -107,6 +120,12 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                     borderSide: BorderSide(color: Color(0xFF5B6670)),
+                    
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black
+                    )
                   ),
                   filled: true,
                   fillColor: Colors.white,
@@ -129,6 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                 alignment: Alignment.centerRight,
                 children: [
                   TextField(
+                    controller: _passwordController,
                     decoration: InputDecoration(
                       hintText: "Contraseña",
                       hintStyle: TextStyle(
@@ -140,13 +160,18 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(5.0),
                         borderSide: BorderSide(color: Color(0xFF5B6670)),
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black
+                        )
+                      ),
                       filled: true,
                       fillColor: Colors.white,
                       contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
                       
                     ),
                     obscureText: _obscureText,
-                    keyboardType: TextInputType.numberWithOptions(),
+                    keyboardType: TextInputType.text,
                   ),
                  
                   // Botón para mostrar/ocultar contraseña
@@ -165,12 +190,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  );
-                },
+                onPressed: _login,
                 child: Text('Iniciar Sesión'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: banorteRed,
