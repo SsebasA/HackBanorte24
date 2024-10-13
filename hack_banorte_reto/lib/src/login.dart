@@ -15,6 +15,7 @@ const Color banorteGrey = Color.fromARGB(255, 91, 102, 112);
 const Color banorteGreen = Color.fromARGB(255, 108, 192, 74);
 const Color banorteOrange = Color.fromARGB(255, 245, 104, 28);
 const Color banorteYellow = Color.fromARGB(255, 248, 164, 1);
+const Color formGrey = Color.fromARGB(255, 246, 246, 246);
 
 class MyApp extends StatelessWidget {
   @override

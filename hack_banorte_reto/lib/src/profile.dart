@@ -141,7 +141,12 @@ class ProfilePage extends StatelessWidget {
           Container(
             child:
             ElevatedButton(
-              onPressed: () {}, 
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage())
+                );
+              }, 
               child: Text("Cerrar sesión"),
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,

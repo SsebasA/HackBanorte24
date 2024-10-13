@@ -65,9 +65,30 @@ class UpdatePasswordPage extends StatelessWidget {
             
             SizedBox(height: 20,),
             Container(
-                child: Padding(padding: EdgeInsets.symmetric(horizontal: 20.0), child:  CupertinoTextField(
-                placeholder: "Contraseña anterior",
-            ),
+                child: Padding(padding: EdgeInsets.symmetric(horizontal: 20.0), child:  
+                  TextField(
+                decoration: InputDecoration(
+                  hintText: "Contraseña anterior",
+                  hintStyle: TextStyle(
+                    fontFamily: 'Gotham', // Asegúrate de agregar la fuente en tu proyecto
+                    fontSize: 12,
+                    color: Color(0xFF5B6670),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(color: Color(0xFF5B6670)),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      // Acción para limpiar el campo
+                    },
+                  ),
+                ),
+      ),
             ),
             ),
             SizedBox(height:20),
@@ -85,9 +106,30 @@ class UpdatePasswordPage extends StatelessWidget {
             
             SizedBox(height: 20,),
             Container(
-                child: Padding(padding: EdgeInsets.symmetric(horizontal: 20.0), child:  CupertinoTextField(
-                placeholder: "Contraseña nueva",
-            ),
+                child: Padding(padding: EdgeInsets.symmetric(horizontal: 20.0), child:  
+            TextField(
+                decoration: InputDecoration(
+                  hintText: "Contraseña nueva",
+                  hintStyle: TextStyle(
+                    fontFamily: 'Gotham', // Asegúrate de agregar la fuente en tu proyecto
+                    fontSize: 12,
+                    color: Color(0xFF5B6670),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(color: Color(0xFF5B6670)),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      // Acción para limpiar el campo
+                    },
+                  ),
+                ),
+      ),
             ),
             ),
             SizedBox(height: 40,),

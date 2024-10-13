@@ -1,12 +1,9 @@
-import 'package:com.banorteEduApp.app/src/courses.dart';
 import 'package:com.banorteEduApp.app/src/login.dart';
-import 'package:com.banorteEduApp.app/src/profile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -26,25 +23,9 @@ class ChatScreen extends StatefulWidget {
   _ChatScreenState createState() => _ChatScreenState();
 }
 
-
-
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _controller = TextEditingController();
-  int _currentIndex = 0;
-
-  void onTapTapped(int index){
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
-
-  final List<Widget> _pages = [
-    ChatScreen(),
-    Profile(),
-    Courses(),
-  ];
-
+  bool _hasSentMessage = false; // Booleano para rastrear si se ha enviado un mensaje
   List<String> _messages = [];
 
   void _sendMessage() {
@@ -52,76 +33,54 @@ class _ChatScreenState extends State<ChatScreen> {
       setState(() {
         _messages.add(_controller.text);
         _controller.clear();
+        _hasSentMessage = true; // Cambia el estado cuando se envía el primer mensaje
       });
     }
-  }
-
-  void _openMenu() {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Container(
-          width: MediaQuery.of(context).size.width * 0.5, // Ocupa la mitad de la pantalla
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Opción 1'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.person),
-                title: Text('Opción 2'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.logout),
-                title: Text('Opción 3'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: banorteGrey,
+      backgroundColor: banorteGrey, // Cambia el color de fondo según lo necesites
       body: Column(
         children: <Widget>[
-          // Botón superior
-          SizedBox(height: 300),
-          GestureDetector(
-            onTap: _openMenu,
-            child: Container(
+          // Espacio para la imagen solo si no se ha enviado un mensaje
+          if (!_hasSentMessage) ...[
+            SizedBox(height: 300),
+            Container(
               padding: EdgeInsets.all(20.0),
               alignment: Alignment.topCenter,
               child: Image.asset("assets/images/logo.png"),
             ),
-          ),
+          ],
           Expanded(
             child: ListView.builder(
               itemCount: _messages.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Container(
+                return Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
                     padding: EdgeInsets.all(12.0),
                     margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(8.0),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12.0),
+                        topRight: Radius.circular(12.0),
+                        bottomLeft: Radius.circular(12.0),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 4.0,
+                          offset: Offset(2, 2),
+                        ),
+                      ],
                     ),
-                    child: Text(_messages[index]),
+                    child: Text(
+                      _messages[index],
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                 );
               },
@@ -137,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     controller: _controller,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.grey[400],
+                      fillColor: Colors.grey[300],
                       hintText: 'Ask Me anything...',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30.0),
@@ -148,7 +107,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 SizedBox(width: 8.0),
                 IconButton(
                   icon: Icon(Icons.send),
-                  color: Colors.white,
+                  color: Colors.blue, // Cambia el color del ícono según lo necesites
                   onPressed: _sendMessage,
                 ),
               ],
