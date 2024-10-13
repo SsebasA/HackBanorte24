@@ -1,4 +1,5 @@
 import 'package:com.banorteEduApp.app/ChatMainScreen.dart';
+import 'package:com.banorteEduApp.app/home.dart';
 import 'package:com.banorteEduApp.app/reestablecer_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,7 +31,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool _obscureText = true; // Estado para ocultar/mostrar la contraseña
+  bool _obscureText = true;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController  _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> _login() async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: _emailController.text, 
+        password: _passwordController.text);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ChatScreen()));
+    } catch (e) {
+      print("Error al iniciar sesión $e");
+    }
+  }
+
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -106,10 +122,9 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ElevatedButton(
                 onPressed: () {
-                  // Lógica para iniciar sesión
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ChatScreen()),
+                    MaterialPageRoute(builder: (context) => HomePage()),
                   );
                 },
                 child: Text('Iniciar Sesión'),

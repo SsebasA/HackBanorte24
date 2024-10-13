@@ -1,3 +1,5 @@
+import 'package:com.banorteEduApp.app/courses.dart';
+import 'package:com.banorteEduApp.app/profile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,8 +26,25 @@ class ChatScreen extends StatefulWidget {
   _ChatScreenState createState() => _ChatScreenState();
 }
 
+
+
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _controller = TextEditingController();
+  int _currentIndex = 0;
+
+  void onTapTapped(int index){
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+
+  final List<Widget> _pages = [
+    ChatScreen(),
+    Profile(),
+    Courses(),
+  ];
+
   List<String> _messages = [];
 
   void _sendMessage() {

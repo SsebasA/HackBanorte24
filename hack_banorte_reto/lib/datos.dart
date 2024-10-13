@@ -1,5 +1,3 @@
-import 'package:com.banorteEduApp.app/ChatMainScreen.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:com.banorteEduApp.app/login.dart';
@@ -7,9 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 
-void main() {
-  runApp(MyApp());
-}
 const Color banorteRed = Color.fromARGB(255, 236, 0, 41);
 
 class MyApp extends StatelessWidget {
@@ -37,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _confirmPasswordVisible = false;
   bool _termsAccepted = false;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
+  final DatabaseReference _dbRef = FirebaseDatabase.instance.ref().child('users');
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
@@ -59,6 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
           'first_name': _firstNameController.text.trim(),
           'second_name': _secondNameController.text.trim(),
           'created_at': DateTime.now().toIso8601String(),
+          'password': _passwordController.text.trim(),
         });
       }
     } on FirebaseAuthException catch(e) {
