@@ -1,33 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dialogflow Agent</title>
-  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
-  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
-</head>
-<body>
-  <df-messenger
-    oauth-client-id="INSERT_OAUTH_CLIENT_ID"
-    location="us-central1"
-    project-id="gcp-banorte-hackaton-team-18"
-    agent-id="ee87e5a1-f4fa-4957-9d04-88a6ffc47bd8"
-    language-code="en"
-    max-query-length="-1">
-    <df-messenger-chat
-     chat-title="Agent_know">
-    </df-messenger-chat>
-  </df-messenger>
-</body>
+<link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+<df-messenger
+  location="us-central1"
+  project-id="gcp-banorte-hackaton-team-18"
+  agent-id="ee87e5a1-f4fa-4957-9d04-88a6ffc47bd8"
+  language-code="en"
+  max-query-length="-1">
+  <df-messenger-chat-bubble
+   chat-title="Agent_know">
+  </df-messenger-chat-bubble>
+</df-messenger>
 <style>
   df-messenger {
     z-index: 999;
     position: fixed;
-    bottom: 0;
-    right: 0;
-    top: 0;
-    width: 350px;
+    --df-messenger-font-color: #000;
+    --df-messenger-font-family: Google Sans;
+    --df-messenger-chat-background: #f3f6fc;
+    --df-messenger-message-user-background: #d3e3fd;
+    --df-messenger-message-bot-background: #fff;
+    bottom: 16px;
+    right: 16px;
   }
 </style>
-</html>

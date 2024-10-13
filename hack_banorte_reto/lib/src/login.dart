@@ -95,8 +95,10 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: Center(
                 child: Image.asset("assets/images/logo.png"),
-              ),
+              
+              ), 
             ),
+            Container(child: Text("Banorte"),),
             SizedBox(height: 50),
             // Título
             Text(

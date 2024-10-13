@@ -10,7 +10,10 @@ Este proyecto es una aplicación móvil desarrollada usando principalmente Flutt
 - [Flutter](https://flutter.dev)
 - [Dart](https://flutter.dev)
 - [Git](https://git-scm.com/)
-- [VsCode](htps://code.visualstudio.com/)
+- [VsCode](htps://code.visualstudio.com)
+- [XCode]()
+- [AndroidSDK]()
+
 
 ### Instalación
 1. Clonar el repositorio
@@ -21,5 +24,12 @@ git clone https://github.com/SsebasA/HackBanorte24.git
 ```bash
 code HackBanorte24
 ```
+3. Ejecutar el siguiente comando
+```bash
+flutter pub get
+```
+4. Seleccionar el dispositivo donde se quiere ejecutar el demo
+
+
 
 
