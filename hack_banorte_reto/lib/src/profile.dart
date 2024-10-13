@@ -26,10 +26,8 @@ class Profile extends StatelessWidget {
 }
 
 class ProfilePage extends StatelessWidget {
-  
-  Future<void> _signOut() async {
-    
-  }
+  final AuthService _authService = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,10 +145,7 @@ class ProfilePage extends StatelessWidget {
             child:
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage())
-                );
+                _authService.signOut();
               }, 
               child: Text("Cerrar sesión"),
               style: ElevatedButton.styleFrom(
