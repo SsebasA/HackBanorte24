@@ -1,6 +1,9 @@
+import 'package:com.banorteEduApp.app/ChatMainScreen.dart';
+import 'package:com.banorteEduApp.app/reestablecer_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'datos.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(MyApp());
@@ -60,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 50),
             // Título
             Text(
-              'Inicia tu educación financiera',
+              'Hola, bienvenido de vuelta!',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -84,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                   CupertinoTextField(
                     obscureText: _obscureText,
                     placeholder: "Contraseña",
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   // Botón para mostrar/ocultar contraseña
                   IconButton(
@@ -103,7 +107,10 @@ class _LoginPageState extends State<LoginPage> {
               child: ElevatedButton(
                 onPressed: () {
                   // Lógica para iniciar sesión
-                  
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChatScreen()),
+                  );
                 },
                 child: Text('Iniciar Sesión'),
                 style: ElevatedButton.styleFrom(
@@ -141,6 +148,10 @@ class _LoginPageState extends State<LoginPage> {
                 TextButton(
                   onPressed: () {
                     // Lógica para recuperar contraseña
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ResetPasswordScreen()),
+                    );
                   },
                   child: Text("Olvidé mi contraseña"),
                   style: TextButton.styleFrom(

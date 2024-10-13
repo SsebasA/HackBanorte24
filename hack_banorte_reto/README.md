@@ -1,3 +1,3 @@
-# hack_banorte_reto
+# com.banorteEduApp.app
 
 A new Flutter project.

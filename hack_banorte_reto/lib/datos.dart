@@ -1,7 +1,10 @@
+import 'package:com.banorteEduApp.app/ChatMainScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hack_banorte_reto/ChatMainScreen.dart';
-import 'package:hack_banorte_reto/login.dart';
+import 'package:com.banorteEduApp.app/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 
 void main() {
@@ -33,9 +36,36 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _passwordVisible = false;
   bool _confirmPasswordVisible = false;
   bool _termsAccepted = false;
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _secondNameController = TextEditingController();
+
+  Future<void> registerUser() async {
+    try {
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword
+      (email: _emailController.text.trim(), 
+      password: _passwordController.text.trim(),
+      );
+
+      //Guardar la información en la db
+      User? user = userCredential.user;
+      if (user != null) {
+        _dbRef.child('users').child(user.uid).set({
+          'email': user.email,
+          'first_name': _firstNameController.text.trim(),
+          'second_name': _secondNameController.text.trim(),
+          'created_at': DateTime.now().toIso8601String(),
+        });
+      }
+    } on FirebaseAuthException catch(e) {
+      print('Error: ${e.message}');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,25 +94,27 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // Título
-                Text("Registrate",
+                Text("Registrate y empieza tu educación financiera",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 24, 
                         fontWeight: FontWeight.bold
+  
                       ),
                 ),
                 SizedBox(height:20),
                 
                 // Nombre
 
-                _buildTextInput('Nombre'),
+                _buildTextInput('Nombre', _firstNameController),
                 SizedBox(height: 10.0),
 
                 // Apellido
-                _buildTextInput('Apellido'),
+                _buildTextInput('Apellido', _secondNameController),
                 SizedBox(height: 10.0),
 
                 // Correo Electrónico
-                _buildTextInput('Correo electrónico'),
+                _buildTextInput('Correo electrónico', _emailController),
                 SizedBox(height: 10.0),
 
                 // Contraseña
@@ -106,11 +138,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: <Widget>[
                     Checkbox(
                       value: _termsAccepted,
+                      checkColor: Colors.white,
+                      activeColor: banorteRed,
                       onChanged: (bool? value) {
                         setState(() {
                           _termsAccepted = value ?? false;
                         });
                       },
+                      
                     ),
                     Text('Aceptar Términos y Condiciones'),
                   ],
@@ -119,7 +154,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 // Botones de Atrás y Continuar
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(onPressed: () {
                       Navigator.push(
@@ -132,10 +167,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       backgroundColor: banorteRed,
                       foregroundColor: Colors.white
                     )),
-                    ElevatedButton(onPressed: () {
+                    ElevatedButton(
+                      onPressed: () async {
+                      
+                      await registerUser();
+
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ChatScreen()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     }, 
                     child: Text('Registrar'),
@@ -153,19 +192,28 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   // Función para construir campos de texto estándar
-  Widget _buildTextInput(String labelText) {
-    return CupertinoTextField(
-     placeholder: labelText,
-    );
+  Widget _buildTextInput(String labelText, TextEditingController controller) {
+    return 
+    
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+      child: CupertinoTextField(
+       placeholder: labelText,
+       controller:  controller,
+    ));
   }
 
   // Función para construir campos de contraseña
   Widget _buildPasswordInput(String labelText, TextEditingController controller, bool isVisible, VoidCallback onTap) {
-    return CupertinoTextField(
+    return 
+   Padding( 
+    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+    child:
+    CupertinoTextField(
       controller: controller,
       obscureText: !isVisible,
       placeholder: labelText,
-    );
+    ));
   }
 
   // Función para construir botones

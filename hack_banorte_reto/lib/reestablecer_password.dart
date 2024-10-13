@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:com.banorteEduApp.app/login.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
-  runApp(BankApp());
+  runApp(RestorePassword());
 }
 
-class BankApp extends StatelessWidget {
+class RestorePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,54 +15,28 @@ class BankApp extends StatelessWidget {
   }
 }
 
+
 class ResetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.red),
-          onPressed: () {
-            Navigator.pop(context); // Acción para regresar a la pantalla anterior
-          },
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      backgroundColor: Colors.white,
+      body: 
+      Column(
           children: [
-            Center(
-              child: Column(
-                children: [
-                  SizedBox(height: 20),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Icon(Icons.lock_outline, size: 100, color: Colors.white),
-                        SizedBox(height: 10),
-                        Text(
-                          'Contraseña:',
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+            Container(
+              width: double.infinity,
+              height: 250,
+              decoration: BoxDecoration(
+                color: banorteRed,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(245),
+                  bottomRight: Radius.circular(245),
+                ),
               ),
+              child: Center(
+                child: Image.asset("assets/images/logo.png"),
+                ),
             ),
             SizedBox(height: 40),
             Text(
@@ -68,29 +44,30 @@ class ResetPasswordScreen extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 10),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Ingresa tu correo:',
-                border: OutlineInputBorder(),
-              ),
+            Padding( 
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              child:CupertinoTextField(
+              placeholder: "Email",
               keyboardType: TextInputType.emailAddress,
-            ),
+            )),
             SizedBox(height: 10),
             Text(
               'Te enviaremos un correo para reestablecer tu contraseña',
               style: TextStyle(fontSize: 14),
             ),
-            Spacer(),
+            SizedBox(height: 50,),
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  backgroundColor: banorteRed,
+                  foregroundColor: Colors.white
                 ),
                 onPressed: () {
                   // Acción para enviar el correo de restablecimiento
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
@@ -101,7 +78,6 @@ class ResetPasswordScreen extends StatelessWidget {
             SizedBox(height: 20),
           ],
         ),
-      ),
     );
   }
 }

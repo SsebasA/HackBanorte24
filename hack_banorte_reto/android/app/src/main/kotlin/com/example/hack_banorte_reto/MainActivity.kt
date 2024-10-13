@@ -1,4 +1,4 @@
-package com.example.hack_banorte_reto
+package com.banorteEduApp.app
 
 import io.flutter.embedding.android.FlutterActivity
 

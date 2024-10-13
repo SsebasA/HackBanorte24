@@ -1,4 +1,4 @@
-name: hack_banorte_reto
+name: com.banorteEduApp.app
 description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -15,6 +15,10 @@ dependencies:
   english_words: ^4.0.0
   provider: ^6.0.0
   flutter_svg: ^2.0.7  # Asegúrate de usar la versión más reciente
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  firebase_database: ^11.1.4
+  
 
 
 dev_dependencies:

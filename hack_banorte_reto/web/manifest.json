@@ -1,6 +1,6 @@
 {
-    "name": "hack_banorte_reto",
-    "short_name": "hack_banorte_reto",
+    "name": "com.banorteEduApp.app",
+    "short_name": "com.banorteEduApp.app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
