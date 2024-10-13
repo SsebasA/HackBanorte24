@@ -48,18 +48,12 @@ class _LoginPageState extends State<LoginPage> {
       _emailController.text.trim(),
       _passwordController.text.trim(),
     );
-    if(user != null){
-      Navigator.pushReplacement(
-        context, 
-        MaterialPageRoute(builder: (context) => ChatScreen()),
-        );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al inicar sesión')),
-      );
-    }
+    
   } catch(e) {
     print("Error al iniciar sesión $e");
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Error al iniciar sesión"))
+    );
 
   }
  }

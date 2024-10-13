@@ -1,3 +1,4 @@
+import 'package:com.banorteEduApp.app/src/Services/auth.dart';
 import 'package:com.banorteEduApp.app/src/update_email.dart';
 import 'package:com.banorteEduApp.app/src/update_password.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,10 @@ class Profile extends StatelessWidget {
 }
 
 class ProfilePage extends StatelessWidget {
+  
+  Future<void> _signOut() async {
+    
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
