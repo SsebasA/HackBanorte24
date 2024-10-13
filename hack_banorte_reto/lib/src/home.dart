@@ -1,19 +1,18 @@
-import 'package:com.banorteEduApp.app/chat.dart';
-import 'package:com.banorteEduApp.app/courses.dart';
-import 'package:com.banorteEduApp.app/profile.dart';
+import 'package:com.banorteEduApp.app/src/ChatMainScreen.dart';
+import 'package:com.banorteEduApp.app/src/chat.dart';
+import 'package:com.banorteEduApp.app/src/courses.dart';
+import 'package:com.banorteEduApp.app/src/login.dart';
+import 'package:com.banorteEduApp.app/src/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 
 void main() {
   runApp(MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
       home: HomePage(),
     );
@@ -28,20 +27,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
-  void _onTabTapped(int index){
+  void _onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
 
   final List<Widget> _pages = [
-    ChatPage(),
+    ChatScreen(),
     CoursesPage(),
     Profile(),
   ];
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -54,13 +53,16 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
-            label: 'cursos'
+            label: 'Cursos',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'perfil',
+            label: 'Perfil',
           ),
-        ]),
+        ],
+        selectedItemColor: banorteRed, // Color rojo para el ícono seleccionado
+        unselectedItemColor: banorteGrey, // Color gris para los íconos no seleccionados
+      ),
     );
   }
 }

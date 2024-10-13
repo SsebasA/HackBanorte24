@@ -1,12 +1,12 @@
-import 'package:com.banorteEduApp.app/courses.dart';
-import 'package:com.banorteEduApp.app/profile.dart';
+import 'package:com.banorteEduApp.app/src/courses.dart';
+import 'package:com.banorteEduApp.app/src/login.dart';
+import 'package:com.banorteEduApp.app/src/profile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-const Color banorteGreyBackground = Color.fromARGB(255, 106, 104, 103);
 
 class MyApp extends StatelessWidget {
   @override
@@ -96,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: banorteGreyBackground,
+      backgroundColor: banorteGrey,
       body: Column(
         children: <Widget>[
           // Botón superior

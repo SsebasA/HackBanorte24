@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:com.banorteEduApp.app/login.dart';
+import 'package:com.banorteEduApp.app/src/login.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() {

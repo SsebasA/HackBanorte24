@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:com.banorteEduApp.app/login.dart';
+import 'package:com.banorteEduApp.app/src/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -193,10 +193,32 @@ class _RegisterPageState extends State<RegisterPage> {
     
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-      child: CupertinoTextField(
-       placeholder: labelText,
-       controller:  controller,
-    ));
+      child: 
+      TextField(
+                decoration: InputDecoration(
+                  hintText: labelText,
+                  hintStyle: TextStyle(
+                    fontFamily: 'Gotham', // Asegúrate de agregar la fuente en tu proyecto
+                    fontSize: 12,
+                    color: Color(0xFF5B6670),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(color: Color(0xFF5B6670)),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      // Acción para limpiar el campo
+                    },
+                  ),
+                ),
+      ),
+      
+      );
   }
 
   // Función para construir campos de contraseña
@@ -205,11 +227,31 @@ class _RegisterPageState extends State<RegisterPage> {
    Padding( 
     padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
     child:
-    CupertinoTextField(
-      controller: controller,
-      obscureText: !isVisible,
-      placeholder: labelText,
-    ));
+    TextField(
+                decoration: InputDecoration(
+                  hintText: labelText,
+                  hintStyle: TextStyle(
+                    fontFamily: 'Gotham Book', // Asegúrate de agregar la fuente en tu proyecto
+                    fontSize: 12,
+                    color: Color(0xFF5B6670),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(color: Color(0xFF5B6670)),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      // Acción para limpiar el campo
+                    },
+                  ),
+                ),
+      ),
+      
+    );
   }
 
   // Función para construir botones

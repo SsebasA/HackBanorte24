@@ -1,7 +1,7 @@
-import 'package:com.banorteEduApp.app/login.dart';
+import 'package:com.banorteEduApp.app/src/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'src/firebase_options.dart';
 
 
 void main() async {

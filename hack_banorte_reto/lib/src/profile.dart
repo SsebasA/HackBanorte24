@@ -1,13 +1,14 @@
+import 'package:com.banorteEduApp.app/src/update_email.dart';
+import 'package:com.banorteEduApp.app/src/update_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:com.banorteEduApp.app/login.dart';
+import 'package:com.banorteEduApp.app/src/login.dart';
 
 
 void main() {
   runApp(MyApp());
 }
 
-const Color banorteRed = Color.fromARGB(255, 236, 0, 41);
 
 
 class Profile extends StatelessWidget {
@@ -46,7 +47,8 @@ class ProfilePage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.white
+                color: Colors.white,
+                fontFamily: 'Gotham'
               )),
             ),
           ),
@@ -83,7 +85,8 @@ class ProfilePage extends StatelessWidget {
                 child: Text("Configuración del perfil",
                     style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.w400,  
+                      fontWeight: FontWeight.bold,  
+                      fontFamily: 'Roboto'
                       
                     ),
                     textAlign: TextAlign.left,
@@ -98,7 +101,12 @@ class ProfilePage extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: 
                   TextButton(
-                    onPressed: () {}, 
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UpdateEmailPage())
+                      );
+                    }, 
                     child: Text("Actualizar correo"),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.black,
@@ -112,7 +120,12 @@ class ProfilePage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child:
                       TextButton(
-                        onPressed: () {}, 
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => UpdatePasswordPage())
+                          );
+                        }, 
                         child: Text("Actualizar contraseña"),
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.black,
@@ -134,8 +147,9 @@ class ProfilePage extends StatelessWidget {
                 foregroundColor: Colors.white,
                 backgroundColor: banorteRed
               )),
-          )
-                 
+          ),
+
+            
         ],
       )
     );

@@ -1,6 +1,6 @@
-import 'package:com.banorteEduApp.app/ChatMainScreen.dart';
-import 'package:com.banorteEduApp.app/home.dart';
-import 'package:com.banorteEduApp.app/reestablecer_password.dart';
+import 'package:com.banorteEduApp.app/src/ChatMainScreen.dart';
+import 'package:com.banorteEduApp.app/src/home.dart';
+import 'package:com.banorteEduApp.app/src/reestablecer_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'datos.dart';
@@ -11,6 +11,10 @@ void main() {
 }
 
 const Color banorteRed = Color.fromARGB(255, 236, 0, 41);
+const Color banorteGrey = Color.fromARGB(255, 91, 102, 112);
+const Color banorteGreen = Color.fromARGB(255, 108, 192, 74);
+const Color banorteOrange = Color.fromARGB(255, 245, 104, 28);
+const Color banorteYellow = Color.fromARGB(255, 248, 164, 1);
 
 class MyApp extends StatelessWidget {
   @override
@@ -83,15 +87,38 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Gotham'
               ),
             ),
             SizedBox(height: 20),
             // Campo de texto para email
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: CupertinoTextField(
-                placeholder: "Email",
-              ),
+              child: 
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "Email",
+                  hintStyle: TextStyle(
+                    fontFamily: 'Gotham', // Asegúrate de agregar la fuente en tu proyecto
+                    fontSize: 12,
+                    color: Color(0xFF5B6670),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(color: Color(0xFF5B6670)),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      // Acción para limpiar el campo
+                    },
+                  ),
+                ),
+      ),
+              
             ),
             SizedBox(height: 20),
             // Campo de texto para contraseña
@@ -100,11 +127,27 @@ class _LoginPageState extends State<LoginPage> {
               child: Stack(
                 alignment: Alignment.centerRight,
                 children: [
-                  CupertinoTextField(
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: "Contraseña",
+                      hintStyle: TextStyle(
+                        fontFamily: 'Gotham', // Asegúrate de agregar la fuente en tu proyecto
+                        fontSize: 12,
+                        color: Color(0xFF5B6670),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        borderSide: BorderSide(color: Color(0xFF5B6670)),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                      
+                    ),
                     obscureText: _obscureText,
-                    placeholder: "Contraseña",
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.numberWithOptions(),
                   ),
+                 
                   // Botón para mostrar/ocultar contraseña
                   IconButton(
                     icon: Icon(
