@@ -1,8 +1,5 @@
 import 'package:com.banorteEduApp.app/src/Services/auth.dart';
-import 'package:com.banorteEduApp.app/src/update_email.dart';
-import 'package:com.banorteEduApp.app/src/update_password.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:com.banorteEduApp.app/src/login.dart';
 
 
@@ -30,8 +27,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = _authService.getCurrentUser();
-    final userName = user?.displayName ?? "Usuario"; // Usa un valor predeterminado si no hay nombre
+    final AuthService _authService = AuthService(); // Usa un valor predeterminado si no hay nombre
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -48,7 +44,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Text("Tu Perfil",
+              child: Text("Perfil",
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -69,7 +65,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Text("Bienvenido, $userName",
+              Text("Bienvenido",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -79,16 +75,15 @@ class ProfilePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Configuración del perfil",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Roboto'),
-                    textAlign: TextAlign.left,
-                  ),
+                  
                 ),
               ),
+              ElevatedButton(onPressed: _authService.signOut,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: banorteRed,
+                foregroundColor: Colors.white,
+              ) ,
+              child: Text("Cerrar sesión")),
               // Resto de tu código...
             ],
           ),

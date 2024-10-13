@@ -60,7 +60,7 @@ class CourseListScreen extends StatelessWidget {
             width: double.infinity,
             height: 100,
             decoration: BoxDecoration(
-              color: Colors.red, // Usa un color si banorteRed no está definido
+              color: banorteRed, // Usa un color si banorteRed no está definido
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(250),
                 bottomRight: Radius.circular(250),

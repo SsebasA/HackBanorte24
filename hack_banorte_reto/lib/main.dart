@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    ChatScreen(),
+    DialogflowChat(),
     CourseListScreen(),
     Profile(),
   ];

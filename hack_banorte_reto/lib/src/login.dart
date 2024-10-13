@@ -98,7 +98,6 @@ class _LoginPageState extends State<LoginPage> {
               
               ), 
             ),
-            Container(child: Text("Banorte"),),
             SizedBox(height: 50),
             // Título
             Text(
