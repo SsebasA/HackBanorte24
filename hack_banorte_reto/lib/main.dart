@@ -1,7 +1,7 @@
 import 'package:com.banorteEduApp.app/src/course_home.dart';
 import 'package:com.banorteEduApp.app/src/firebase_options.dart';
 import 'package:flutter/material.dart';
-import 'package:com.banorteEduApp.app/src/ChatMainScreen.dart';
+import 'package:com.banorteEduApp.app/src/agent.dart';
 import 'package:com.banorteEduApp.app/src/courses.dart';
 import 'package:com.banorteEduApp.app/src/profile.dart';
 import 'package:com.banorteEduApp.app/src/login.dart'; // Importa tu página de login existente
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    DialogflowChat(),
+    ChatScreen(),
     CourseListScreen(),
     Profile(),
   ];

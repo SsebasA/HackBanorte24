@@ -11,8 +11,8 @@ Este proyecto es una aplicación móvil desarrollada usando principalmente Flutt
 - [Dart](https://flutter.dev)
 - [Git](https://git-scm.com/)
 - [VsCode](htps://code.visualstudio.com)
-- [XCode]()
-- [AndroidSDK]()
+- [XCode]
+- [AndroidSDK]
 
 
 ### Instalación
@@ -28,7 +28,8 @@ code HackBanorte24
 ```bash
 flutter pub get
 ```
-4. Seleccionar el dispositivo donde se quiere ejecutar el demo
+4. Seleccionar el dispositivo donde se quiere ejecutar el demo (Ios o Android)
+5. Dar click en run and debug
 
 
 

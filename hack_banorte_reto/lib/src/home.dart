@@ -1,4 +1,4 @@
-import 'package:com.banorteEduApp.app/src/ChatMainScreen.dart';
+import 'package:com.banorteEduApp.app/src/agent.dart';
 import 'package:com.banorteEduApp.app/src/chat.dart';
 import 'package:com.banorteEduApp.app/src/course_home.dart';
 import 'package:com.banorteEduApp.app/src/courses.dart';
@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _pages = [
-    DialogflowChat(),
+    ChatScreen(),
     CourseListScreen(),
     Profile(),
   ];

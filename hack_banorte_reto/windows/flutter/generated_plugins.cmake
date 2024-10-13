@@ -3,6 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  cloud_firestore
+  dialogflow_grpc
   firebase_auth
   firebase_core
 )

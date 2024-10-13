@@ -1,4 +1,4 @@
-import 'package:com.banorteEduApp.app/src/ChatMainScreen.dart';
+import 'package:com.banorteEduApp.app/src/agent.dart';
 import 'package:com.banorteEduApp.app/src/Services/auth.dart';
 import 'package:com.banorteEduApp.app/src/home.dart';
 import 'package:com.banorteEduApp.app/src/reestablecer_password.dart';
