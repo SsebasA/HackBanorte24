@@ -1,22 +1,5 @@
-import 'package:com.banorteEduApp.app/src/login.dart';
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Chat UI',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: ChatScreen(),
-    );
-  }
-}
+import 'package:webview_flutter/webview_flutter.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -25,15 +8,21 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _controller = TextEditingController();
-  bool _hasSentMessage = false; // Booleano para rastrear si se ha enviado un mensaje
+  bool _hasSentMessage = false;
   List<String> _messages = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Inicializa WebView si es necesario en dispositivos específicos
+  }
 
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
       setState(() {
         _messages.add(_controller.text);
         _controller.clear();
-        _hasSentMessage = true; // Cambia el estado cuando se envía el primer mensaje
+        _hasSentMessage = true;
       });
     }
   }
@@ -41,10 +30,9 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: banorteGrey, // Cambia el color de fondo según lo necesites
+      backgroundColor: Colors.grey[200], // Cambia el color de fondo según lo necesites
       body: Column(
         children: <Widget>[
-          // Espacio para la imagen solo si no se ha enviado un mensaje
           if (!_hasSentMessage) ...[
             SizedBox(height: 300),
             Container(
@@ -54,39 +42,32 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ],
           Expanded(
-            child: ListView.builder(
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                return Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    padding: EdgeInsets.all(12.0),
-                    margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12.0),
-                        topRight: Radius.circular(12.0),
-                        bottomLeft: Radius.circular(12.0),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 4.0,
-                          offset: Offset(2, 2),
-                        ),
-                      ],
-                    ),
-                    child: Text(
-                      _messages[index],
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                );
-              },
+            // Reemplaza la lista de mensajes con el WebView de Dialogflow
+            child: WebView(
+              initialUrl: Uri.dataFromString('''
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+                  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+                </head>
+                <body>
+                  <df-messenger
+                    oauth-client-id="INSERT_OAUTH_CLIENT_ID"
+                    location="us-central1"
+                    project-id="gcp-banorte-hackaton-team-18"
+                    agent-id="ee87e5a1-f4fa-4957-9d04-88a6ffc47bd8"
+                    language-code="en"
+                    max-query-length="-1">
+                  </df-messenger>
+                </body>
+                </html>
+              ''', mimeType: 'text/html').toString(),
+              javascriptMode: JavascriptMode.unrestricted,
             ),
           ),
-          // Barra inferior para input de texto
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
